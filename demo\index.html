@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width">
+		<title>QueryBerg DEMO</title>
+		<meta name="description" content="QueryBerg DEMO Page. A jQuery PLugin for Prroject Gutenberg">
+		<meta name="author" content="Toshiya TSURU">
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+		<script src="http://code.jquery.com/jquery.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+		<script src="../lib/jquery.jfeed.pack.js"></script>
+		<script src="../src/jquery.queryberg.js"></script>
+		<script>
+			$(function() {
+				var $search = $('input[data-type="search"]'); 
+				$search.change(function() {
+					var query = $(this).val();
+					// show loading message
+					$.mobile.showPageLoadingMsg();
+					// invoke QueryBerg
+					$.qb(query, function(data) {
+						// append each items into listview
+						var $items = $('#items').html('');
+						$.each(data.items, function(index, item){
+							$('<li>').append(
+								$('<a>').attr('href', item.href)
+									.append($('<h3>').text(item.title))
+									.append($('<p>').text(item.description)))
+								.appendTo($items);
+						});
+						// refresh listview
+						$items.listview("refresh");
+						// hide loading message
+						$.mobile.hidePageLoadingMsg();
+					});
+				});
+				$search.trigger('change');
+			});
+		</script>
+	</head>
+	<body>
+		<div data-role="page">
+			<div data-role="header" data-theme="b">
+				<a href='#' date-role="button" data-iconpos="notext" data-icon="home" >Home</a>
+				<h1 class="ui-title" tabindex="0" role="heading" aria-level="1">QueryBerg DEMO</h1>
+				<a href='#' date-role="button" data-iconpos="notext" data-icon="info" >Info</a>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Search items ..." id="items">
+				</ul>
+			</div>
+			<div data-role="footer" data-theme="b">
+				<h4>
+					
+				</h4>
+			</div>
+		</div>
+
+	</body>
+</html>
