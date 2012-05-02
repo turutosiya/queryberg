@@ -1,4 +1,4 @@
-queryberg
+QueryBerg - jQuery plugin for searching Project GUtenberg.
 =========
 
 A jQuery plugin for searching Project Gutenberg
