@@ -1,4 +1,4 @@
 queryberg
 =========
 
-A plugin for search Project Gutenberg
+A jQuery plugin for searching Project Gutenberg
